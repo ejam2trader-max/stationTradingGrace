@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Trading Workstation</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#0a0c10;
+  --surface:#12151c;
+  --surface2:#1a1e28;
+  --surface3:#222736;
+  --border:#ffffff12;
+  --border2:#ffffff22;
+  --accent:#00e5a0;
+  --accent2:#00b37d;
+  --danger:#ff4d6d;
+  --warning:#ffb347;
+  --info:#4d9fff;
+  --text:#e8ecf4;
+  --text2:#8892a4;
+  --text3:#5a6378;
+  --mono:'Space Mono',monospace;
+  --sans:'DM Sans',sans-serif;
+  --r:12px;
+  --r2:8px;
+}
+html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;overflow-x:hidden}
+/* LAYOUT */
+.app{display:flex;flex-direction:column;min-height:100vh}
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.logo{font-family:var(--mono);font-size:14px;font-weight:700;color:var(--accent);letter-spacing:1px}
+.logo span{color:var(--text2)}
+.room-badge{font-family:var(--mono);font-size:10px;color:var(--text3);background:var(--surface3);padding:3px 8px;border-radius:20px;border:1px solid var(--border)}
+.sync-dot{width:7px;height:7px;border-radius:50%;background:var(--accent);display:inline-block;margin-right:6px;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.nav{display:flex;overflow-x:auto;background:var(--surface);border-bottom:1px solid var(--border);scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav-btn{flex-shrink:0;padding:11px 18px;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--text2);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap}
+.nav-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+.nav-btn:hover:not(.active){color:var(--text)}
+.main{flex:1;padding:16px;max-width:900px;margin:0 auto;width:100%}
+/* TABS */
+.tab{display:none}.tab.active{display:block}
+/* CARDS */
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px}
+.card-title{font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:14px}
+/* INPUTS */
+input,select,textarea{background:var(--surface2);border:1px solid var(--border2);color:var(--text);font-family:var(--sans);font-size:14px;border-radius:var(--r2);padding:9px 12px;width:100%;outline:none;transition:border .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}
+textarea{resize:vertical;min-height:70px}
+label{font-size:12px;color:var(--text2);margin-bottom:4px;display:block;font-weight:500}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:9px 16px;border-radius:var(--r2);border:none;font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s}
+.btn-primary{background:var(--accent);color:#000}
+.btn-primary:hover{background:var(--accent2)}
+.btn-danger{background:var(--danger);color:#fff}
+.btn-danger:hover{opacity:.85}
+.btn-ghost{background:var(--surface2);color:var(--text2);border:1px solid var(--border2)}
+.btn-ghost:hover{color:var(--text);border-color:var(--border)}
+.btn-sm{padding:6px 12px;font-size:12px}
+/* METRICS */
+.metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
+@media(min-width:600px){.metrics{grid-template-columns:repeat(4,1fr)}}
+.metric{background:var(--surface2);border-radius:var(--r2);padding:12px;border:1px solid var(--border)}
+.metric-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;font-family:var(--mono)}
+.metric-value{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--text)}
+.metric-value.pos{color:var(--accent)}
+.metric-value.neg{color:var(--danger)}
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border-radius:var(--r2);border:1px solid var(--border)}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:500px}
+th{background:var(--surface2);padding:9px 12px;text-align:left;font-size:11px;font-weight:600;color:var(--text3);letter-spacing:.5px;text-transform:uppercase;border-bottom:1px solid var(--border)}
+td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:var(--surface2)}
+.badge{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.badge-stop{background:#ff4d6d22;color:var(--danger)}
+.badge-ok{background:#00e5a022;color:var(--accent)}
+.status-bar{display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:var(--r2);margin-bottom:12px;font-size:13px;font-weight:600}
+.status-ok{background:#00e5a011;border:1px solid #00e5a033;color:var(--accent)}
+.status-warn{background:#ffb34711;border:1px solid #ffb34733;color:var(--warning)}
+.status-danger{background:#ff4d6d11;border:1px solid #ff4d6d33;color:var(--danger)}
+/* CALC */
+.calc-result{background:var(--surface2);border-radius:var(--r2);padding:14px;margin-top:12px;border:1px solid var(--border)}
+.calc-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;font-size:13px}
+.calc-row:last-child{margin-bottom:0}
+.calc-row .k{color:var(--text2)}
+.calc-row .v{font-family:var(--mono);font-weight:700;color:var(--accent);font-size:16px}
+/* PLAN 21 */
+.days-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:8px;margin-top:12px}
+.day-cell{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r2);padding:10px 8px;text-align:center}
+.day-cell.highlight{border-color:var(--accent);background:#00e5a011}
+.day-cell .dn{font-size:10px;color:var(--text3);margin-bottom:2px}
+.day-cell .dv{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--text)}
+/* HEALTH */
+.health-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.health-item{background:var(--surface2);border-radius:var(--r2);padding:12px;text-align:center;border:1px solid var(--border);cursor:pointer;transition:all .2s;user-select:none}
+.health-item.done{border-color:var(--accent);background:#00e5a011}
+.health-item .icon{font-size:22px;margin-bottom:4px}
+.health-item .hl{font-size:12px;color:var(--text2)}
+/* MEDS */
+.med-item{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--surface2);border-radius:var(--r2);margin-bottom:6px;border:1px solid var(--border);cursor:pointer;transition:all .2s}
+.med-item.taken{border-color:var(--accent);opacity:.7}
+.med-item .med-name{font-size:13px;font-weight:600}
+.med-item .med-time{font-size:12px;color:var(--text2)}
+.check{width:20px;height:20px;border-radius:50%;border:2px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;transition:all .2s}
+.med-item.taken .check{background:var(--accent);border-color:var(--accent);color:#000}
+/* DIVIDER */
+hr{border:none;border-top:1px solid var(--border);margin:14px 0}
+/* LOADING */
+.loader{display:flex;align-items:center;justify-content:center;padding:40px;color:var(--text3);font-size:13px;gap:10px}
+.spin{width:18px;height:18px;border:2px solid var(--border2);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* TOAST */
+.toast-wrap{position:fixed;bottom:20px;right:20px;z-index:999;display:flex;flex-direction:column;gap:8px}
+.toast{padding:10px 16px;background:var(--surface3);border:1px solid var(--border2);border-radius:var(--r2);font-size:13px;color:var(--text);box-shadow:0 4px 20px #0008;animation:toastanim .3s ease}
+@keyframes toastanim{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+/* CHART */
+.chart-wrap{position:relative;height:200px;margin-top:12px}
+/* MODAL */
+.modal-overlay{position:fixed;inset:0;background:#000a;z-index:500;display:flex;align-items:center;justify-content:center;padding:16px}
+.modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:20px;width:100%;max-width:480px;max-height:90vh;overflow-y:auto}
+.modal-title{font-family:var(--mono);font-size:13px;color:var(--accent);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
+.modal-actions{display:flex;gap:8px;margin-top:16px;justify-content:flex-end}
+/* EMPTY */
+.empty{text-align:center;padding:30px;color:var(--text3);font-size:13px}
+.section-title{font-family:var(--mono);font-size:11px;color:var(--text3);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px;margin-top:16px}
+/* responsive adjustments */
+@media(max-width:480px){
+  .form-row,.form-row-3{grid-template-columns:1fr}
+  .metrics{grid-template-columns:1fr 1fr}
+  .main{padding:12px}
+}
+</style>
+</head>
+<body>
+
+<div id="app" class="app">
+  <div class="topbar">
+    <div class="logo">EA<span>/</span>TRADING</div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span id="sync-status" style="font-size:12px;color:var(--text3)"><span class="sync-dot"></span>Conectando…</span>
+      <span id="room-badge" class="room-badge">---</span>
+    </div>
+  </div>
+  <nav class="nav">
+    <button class="nav-btn active" onclick="switchTab('bitacora')">📋 Bitácora</button>
+    <button class="nav-btn" onclick="switchTab('calculadora')">⚡ Calculadora</button>
+    <button class="nav-btn" onclick="switchTab('riesgo')">🛡 Riesgo</button>
+    <button class="nav-btn" onclick="switchTab('plan21')">📈 21 Días</button>
+    <button class="nav-btn" onclick="switchTab('salud')">❤️ Salud</button>
+  </nav>
+  <div class="main">
+    <!-- BITACORA -->
+    <div id="tab-bitacora" class="tab active">
+      <div class="card">
+        <div class="card-title">Configuración del día</div>
+        <div class="form-row">
+          <div><label>Saldo Inicial ($)</label><input type="number" id="b-saldo" placeholder="1000" step="0.01" oninput="calcBitacora()"></div>
+          <div><label>Fecha</label><input type="date" id="b-fecha"></div>
+        </div>
+        <div class="form-row">
+          <div><label>Meta Ganancia (%)</label><input type="number" id="b-meta-gan" placeholder="3" step="0.1" oninput="calcBitacora()"></div>
+          <div><label>Meta Pérdida (%)</label><input type="number" id="b-meta-perd" placeholder="1" step="0.1" oninput="calcBitacora()"></div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="saveDayConfig()">💾 Guardar config</button>
+      </div>
+      <div class="metrics">
+        <div class="metric"><div class="metric-label">Meta Ganancia</div><div class="metric-value" id="m-meta-gan">—</div></div>
+        <div class="metric"><div class="metric-label">Meta Pérdida</div><div class="metric-value" id="m-meta-perd">—</div></div>
+        <div class="metric"><div class="metric-label">P&L Acumulado</div><div class="metric-value" id="m-pnl">$0.00</div></div>
+        <div class="metric"><div class="metric-label">% P&L</div><div class="metric-value" id="m-pnl-pct">0.00%</div></div>
+      </div>
+      <div id="b-status" class="status-bar status-ok">EN PROCESO — CONTINUAR OPERANDO</div>
+      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
+        <button class="btn btn-primary" onclick="openAddOp()">+ Agregar operación</button>
+        <button class="btn btn-ghost" onclick="clearDay()">🗑 Limpiar día</button>
+        <button class="btn btn-ghost" onclick="exportCSV()">📥 Exportar CSV</button>
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th>#</th><th>Activo</th><th>Resultado ($)</th><th>Acumulado</th><th>¿Parar?</th><th>Notas</th><th></th></tr></thead>
+          <tbody id="ops-tbody"><tr><td colspan="7" class="empty">Sin operaciones. Pulsa "+ Agregar operación".</td></tr></tbody>
+        </table>
+      </div>
+      <div class="chart-wrap"><canvas id="pnl-chart"></canvas></div>
+    </div>
+
+    <!-- CALCULADORA -->
+    <div id="tab-calculadora" class="tab">
+      <div class="card">
+        <div class="card-title">Calculadora de Lotaje</div>
+        <div class="form-row">
+          <div><label>Puntos / TP</label><input type="number" id="c-puntos" value="21" step="1" oninput="calcLotaje()"></div>
+          <div><label>Stop Loss (SL)</label><input type="number" id="c-sl" value="1" step="0.01" oninput="calcLotaje()"></div>
+        </div>
+        <div class="calc-result" id="calc-lot-result">
+          <div class="calc-row"><span class="k">PROFIT (SL × 3)</span><span class="v" id="cr-profit">21.00</span></div>
+          <div class="calc-row"><span class="k">LOTAJE (SL ÷ Puntos)</span><span class="v" id="cr-lotaje">0.05</span></div>
+          <div class="calc-row"><span class="k">2 ENTRADAS (Lotaje ÷ 2)</span><span class="v" id="cr-2ent">0.025</span></div>
+          <div class="calc-row"><span class="k">RIESGO (SL × Lotaje)</span><span class="v" id="cr-riesgo">—</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIESGO -->
+    <div id="tab-riesgo" class="tab">
+      <div class="card">
+        <div class="card-title">Gestión de Riesgo Diario</div>
+        <div class="form-row-3">
+          <div><label>Capital Inicial ($)</label><input type="number" id="r-capital" value="1000" step="10" oninput="calcRiesgo()"></div>
+          <div><label>% Riesgo Diario</label><input type="number" id="r-pct" value="2" step="0.1" oninput="calcRiesgo()"></div>
+          <div><label>N° Operaciones</label><input type="number" id="r-ops" value="3" step="1" oninput="calcRiesgo()"></div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="saveRiesgo()">💾 Guardar</button>
+        <div class="calc-result" style="margin-top:14px">
+          <div class="calc-row"><span class="k">RIESGO DIARIO</span><span class="v" id="rr-diario">$20.00</span></div>
+          <div class="calc-row"><span class="k">RIESGO POR OPERACIÓN</span><span class="v" id="rr-op">$6.67</span></div>
+          <div class="calc-row"><span class="k">STOP LOSS POR OPERACIÓN</span><span class="v" id="rr-sl">$6.67</span></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Información</div>
+        <p style="font-size:13px;color:var(--text2);line-height:1.7">Calcula el stop loss adecuado para cada operación. <b style="color:var(--text)">Capital</b>: total disponible. <b style="color:var(--text)">% Riesgo</b>: máximo del capital a arriesgar en el día. <b style="color:var(--text)">Operaciones</b>: en cuántas dividir el riesgo diario. El <b style="color:var(--accent)">Stop Loss por operación</b> es el monto máximo de pérdida por trade.</p>
+      </div>
+    </div>
+
+    <!-- PLAN 21 -->
+    <div id="tab-plan21" class="tab">
+      <div class="card">
+        <div class="card-title">Plan de 21 Días — Interés Compuesto</div>
+        <div class="form-row">
+          <div><label>Capital Inicial ($)</label><input type="number" id="p-capital" value="150" step="10" oninput="calcPlan21()"></div>
+          <div><label>Porcentaje Diario (%)</label><input type="number" id="p-pct" value="20" step="0.1" oninput="calcPlan21()"></div>
+        </div>
+        <button class="btn btn-ghost btn-sm" onclick="savePlan21()">💾 Guardar</button>
+        <div class="metrics" style="margin-top:14px">
+          <div class="metric"><div class="metric-label">Día 1</div><div class="metric-value pos" id="p-d1">—</div></div>
+          <div class="metric"><div class="metric-label">Día 7</div><div class="metric-value pos" id="p-d7">—</div></div>
+          <div class="metric"><div class="metric-label">Día 14</div><div class="metric-value pos" id="p-d14">—</div></div>
+          <div class="metric"><div class="metric-label">Día 21</div><div class="metric-value pos" id="p-d21">—</div></div>
+        </div>
+        <div class="metrics">
+          <div class="metric"><div class="metric-label">Capital Inicial</div><div class="metric-value" id="p-ini">—</div></div>
+          <div class="metric"><div class="metric-label">Capital Final</div><div class="metric-value pos" id="p-fin">—</div></div>
+          <div class="metric"><div class="metric-label">Ganancia Total</div><div class="metric-value pos" id="p-gan">—</div></div>
+          <div class="metric"><div class="metric-label">Incremento</div><div class="metric-value pos" id="p-inc">—</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Progresión día a día</div>
+        <div class="days-grid" id="days-grid"></div>
+      </div>
+    </div>
+
+    <!-- SALUD -->
+    <div id="tab-salud" class="tab">
+      <div class="card">
+        <div class="card-title">Rutina del Día</div>
+        <div class="health-grid" id="health-grid">
+          <div class="health-item" id="h-agua" onclick="toggleHealth('agua')"><div class="icon">💧</div><div class="hl">Agua</div></div>
+          <div class="health-item" id="h-estirar" onclick="toggleHealth('estirar')"><div class="icon">🤸</div><div class="hl">Estirar</div></div>
+          <div class="health-item" id="h-meds" onclick="toggleHealth('meds')"><div class="icon">💊</div><div class="hl">Medicamentos</div></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Medicamentos</div>
+        <div id="meds-list">
+          <div class="med-item" id="med-loz9" onclick="toggleMed('loz9')">
+            <div><div class="med-name">Losartán</div><div class="med-time">9:00 AM</div></div>
+            <div class="check" id="chk-loz9">✓</div>
+          </div>
+          <div class="med-item" id="med-aml4" onclick="toggleMed('aml4')">
+            <div><div class="med-name">Amlodipina</div><div class="med-time">4:00 PM</div></div>
+            <div class="check" id="chk-aml4">✓</div>
+          </div>
+          <div class="med-item" id="med-loz9pm" onclick="toggleMed('loz9pm')">
+            <div><div class="med-name">Losartán</div><div class="med-time">9:00 PM</div></div>
+            <div class="check" id="chk-loz9pm">✓</div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-title">Notas de salud del día</div>
+        <textarea id="salud-notas" placeholder="Cómo te sientes hoy…" oninput="debSaveHealth()"></textarea>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL AGREGAR OPERACION -->
+<div id="modal-add" class="modal-overlay" style="display:none">
+  <div class="modal">
+    <div class="modal-title">Nueva Operación</div>
+    <div style="margin-bottom:10px"><label>Activo / Instrumento</label><input type="text" id="op-activo" placeholder="XAUUSD, EUR/USD…"></div>
+    <div style="margin-bottom:10px"><label>Resultado ($)</label><input type="number" id="op-result" placeholder="+50 o -20" step="0.01"></div>
+    <div style="margin-bottom:10px"><label>Notas / Observaciones</label><textarea id="op-notas" placeholder="Estrategia usada, condiciones de mercado…"></textarea></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
+      <button class="btn btn-primary" onclick="addOp()">Agregar</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast-wrap" id="toast-wrap"></div>
+
+<!-- Firebase SDK -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, addDoc, deleteDoc, query, orderBy, getDocs, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+// ─── FIREBASE CONFIG ────────────────────────────────────────────────────────
+// Detectar room por URL o crear uno nuevo
+const params = new URLSearchParams(location.search);
+let room = params.get('room');
+if(!room){
+  room = Math.random().toString(36).slice(2,12);
+  const url = new URL(location.href);
+  url.searchParams.set('room', room);
+  history.replaceState({}, '', url);
+}
+document.getElementById('room-badge').textContent = room.slice(0,8)+'…';
+
+let app, db;
+try{
+  app = initializeApp(firebaseConfig);
+  db = getFirestore(app);
+  setupListeners();
+}catch(e){
+  console.warn('Firebase no configurado – modo local');
+  document.getElementById('sync-status').innerHTML = '⚠ Modo local';
+}
+
+function roomDoc(path){ return doc(db, 'rooms', room, path); }
+function roomCol(path){ return collection(db, 'rooms', room, path); }
+
+// ─── SYNC ───────────────────────────────────────────────────────────────────
+function setupListeners(){
+  // Config bitácora
+  onSnapshot(roomDoc('config/day'), snap=>{
+    if(!snap.exists()) return;
+    const d = snap.data();
+    if(d.saldo) document.getElementById('b-saldo').value = d.saldo;
+    if(d.fecha) document.getElementById('b-fecha').value = d.fecha;
+    if(d.metagan) document.getElementById('b-meta-gan').value = d.metagan;
+    if(d.metaperd) document.getElementById('b-meta-perd').value = d.metaperd;
+    calcBitacora();
+  });
+  // Operaciones
+  const opsQ = query(roomCol('ops'), orderBy('ts'));
+  onSnapshot(opsQ, snap=>{
+    window._ops = snap.docs.map(d=>({id:d.id, ...d.data()}));
+    renderOps();
+    calcBitacora();
+  });
+  // Riesgo
+  onSnapshot(roomDoc('config/riesgo'), snap=>{
+    if(!snap.exists()) return;
+    const d = snap.data();
+    if(d.capital) document.getElementById('r-capital').value = d.capital;
+    if(d.pct) document.getElementById('r-pct').value = d.pct;
+    if(d.ops) document.getElementById('r-ops').value = d.ops;
+    calcRiesgo();
+  });
+  // Plan 21
+  onSnapshot(roomDoc('config/plan21'), snap=>{
+    if(!snap.exists()) return;
+    const d = snap.data();
+    if(d.capital) document.getElementById('p-capital').value = d.capital;
+    if(d.pct) document.getElementById('p-pct').value = d.pct;
+    calcPlan21();
+  });
+  // Salud
+  onSnapshot(roomDoc('config/salud'), snap=>{
+    if(!snap.exists()) return;
+    const d = snap.data();
+    window._salud = d;
+    renderSalud(d);
+  });
+  document.getElementById('sync-status').innerHTML = '<span class="sync-dot"></span>Sincronizado';
+}
+
+// ─── BITACORA ───────────────────────────────────────────────────────────────
+window._ops = [];
+
+window.saveDayConfig = async function(){
+  if(!db) return;
+  await setDoc(roomDoc('config/day'),{
+    saldo: parseFloat(document.getElementById('b-saldo').value)||0,
+    fecha: document.getElementById('b-fecha').value,
+    metagan: parseFloat(document.getElementById('b-meta-gan').value)||3,
+    metaperd: parseFloat(document.getElementById('b-meta-perd').value)||1,
+  });
+  toast('✅ Configuración guardada');
+};
+
+window.calcBitacora = function(){
+  const saldo = parseFloat(document.getElementById('b-saldo').value)||0;
+  const metagan = parseFloat(document.getElementById('b-meta-gan').value)||3;
+  const metaperd = parseFloat(document.getElementById('b-meta-perd').value)||1;
+  const pnl = window._ops.reduce((a,o)=>a+(parseFloat(o.result)||0),0);
+  const pct = saldo>0 ? (pnl/saldo*100) : 0;
+  const mGan = saldo * metagan/100;
+  const mPerd = saldo * metaperd/100;
+  document.getElementById('m-meta-gan').textContent = '$'+mGan.toFixed(2);
+  document.getElementById('m-meta-perd').textContent = '-$'+mPerd.toFixed(2);
+  const pnlEl = document.getElementById('m-pnl');
+  pnlEl.textContent = (pnl>=0?'$':'$')+pnl.toFixed(2);
+  pnlEl.className = 'metric-value '+(pnl>0?'pos':pnl<0?'neg':'');
+  const pctEl = document.getElementById('m-pnl-pct');
+  pctEl.textContent = pct.toFixed(2)+'%';
+  pctEl.className = 'metric-value '+(pct>0?'pos':pct<0?'neg':'');
+  const sb = document.getElementById('b-status');
+  if(pnl >= mGan){ sb.className='status-bar status-ok'; sb.textContent='🏆 META DE GANANCIA ALCANZADA — DETENER'; }
+  else if(pnl <= -mPerd){ sb.className='status-bar status-danger'; sb.textContent='🛑 LÍMITE DE PÉRDIDA — PARAR OPERACIONES'; }
+  else { sb.className='status-bar status-ok'; sb.textContent='✅ EN PROCESO — CONTINUAR OPERANDO'; }
+  renderChart();
+};
+
+window.openAddOp = function(){ document.getElementById('modal-add').style.display='flex'; };
+window.closeModal = function(){ document.getElementById('modal-add').style.display='none'; };
+
+window.addOp = async function(){
+  const activo = document.getElementById('op-activo').value.trim();
+  const result = parseFloat(document.getElementById('op-result').value)||0;
+  const notas = document.getElementById('op-notas').value.trim();
+  if(!activo){ toast('⚠ Ingresa el activo'); return; }
+  const saldo = parseFloat(document.getElementById('b-saldo').value)||0;
+  const metaperd = parseFloat(document.getElementById('b-meta-perd').value)||1;
+  const mPerd = saldo * metaperd/100;
+  const cumAcc = window._ops.reduce((a,o)=>a+(parseFloat(o.result)||0),0) + result;
+  const parar = cumAcc <= -mPerd ? 'SI' : 'NO';
+  if(db){
+    await addDoc(roomCol('ops'), { activo, result, notas, parar, ts: Date.now() });
+  } else {
+    const id = Date.now().toString();
+    window._ops.push({id,activo,result,notas,parar,ts:Date.now()});
+    renderOps(); calcBitacora();
+  }
+  document.getElementById('op-activo').value='';
+  document.getElementById('op-result').value='';
+  document.getElementById('op-notas').value='';
+  closeModal();
+  toast('✅ Operación registrada');
+};
+
+window.delOp = async function(id){
+  if(!confirm('¿Eliminar esta operación?')) return;
+  if(db){ await deleteDoc(doc(db,'rooms',room,'ops',id)); }
+  else { window._ops = window._ops.filter(o=>o.id!==id); renderOps(); calcBitacora(); }
+};
+
+window.renderOps = function(){
+  const tb = document.getElementById('ops-tbody');
+  if(!window._ops.length){ tb.innerHTML='<tr><td colspan="7" class="empty">Sin operaciones hoy.</td></tr>'; return; }
+  let acc=0;
+  tb.innerHTML = window._ops.map((o,i)=>{
+    acc += parseFloat(o.result)||0;
+    const cls = (parseFloat(o.result)||0)>=0?'color:var(--accent)':'color:var(--danger)';
+    const aclr = acc>=0?'color:var(--accent)':'color:var(--danger)';
+    return `<tr>
+      <td>${i+1}</td>
+      <td><b>${o.activo}</b></td>
+      <td style="${cls}">${parseFloat(o.result)>=0?'+':''}${parseFloat(o.result).toFixed(2)}</td>
+      <td style="${aclr}">${acc>=0?'+':''}${acc.toFixed(2)}</td>
+      <td><span class="badge ${o.parar==='SI'?'badge-stop':'badge-ok'}">${o.parar}</span></td>
+      <td style="font-size:12px;color:var(--text2)">${o.notas||'—'}</td>
+      <td><button class="btn btn-ghost btn-sm" onclick="delOp('${o.id}')">✕</button></td>
+    </tr>`;
+  }).join('');
+};
+
+window.clearDay = async function(){
+  if(!confirm('¿Limpiar todas las operaciones del día?')) return;
+  if(db){
+    const snap = await getDocs(roomCol('ops'));
+    const batch = writeBatch(db);
+    snap.forEach(d=>batch.delete(d.ref));
+    await batch.commit();
+  } else { window._ops=[]; renderOps(); calcBitacora(); }
+  toast('🗑 Operaciones eliminadas');
+};
+
+window.exportCSV = function(){
+  let csv='#,Activo,Resultado,Acumulado,Parar,Notas\n';
+  let acc=0;
+  window._ops.forEach((o,i)=>{
+    acc+=parseFloat(o.result)||0;
+    csv+=`${i+1},"${o.activo}",${parseFloat(o.result).toFixed(2)},${acc.toFixed(2)},${o.parar},"${(o.notas||'').replace(/"/g,"'")}"\n`;
+  });
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
+  a.download='bitacora_trading.csv'; a.click();
+};
+
+// ─── CALCULADORA ─────────────────────────────────────────────────────────────
+window.calcLotaje = function(){
+  const pts = parseFloat(document.getElementById('c-puntos').value)||21;
+  const sl = parseFloat(document.getElementById('c-sl').value)||1;
+  const profit = sl*3;
+  const lotaje = sl/pts;
+  const ent2 = lotaje/2;
+  const riesgo = sl*lotaje;
+  document.getElementById('cr-profit').textContent = profit.toFixed(2);
+  document.getElementById('cr-lotaje').textContent = lotaje.toFixed(4);
+  document.getElementById('cr-2ent').textContent = ent2.toFixed(4);
+  document.getElementById('cr-riesgo').textContent = riesgo.toFixed(4);
+};
+
+// ─── RIESGO ──────────────────────────────────────────────────────────────────
+window.calcRiesgo = function(){
+  const cap = parseFloat(document.getElementById('r-capital').value)||1000;
+  const pct = parseFloat(document.getElementById('r-pct').value)||2;
+  const ops = parseFloat(document.getElementById('r-ops').value)||3;
+  const diario = cap*pct/100;
+  const porOp = diario/ops;
+  document.getElementById('rr-diario').textContent='$'+diario.toFixed(2);
+  document.getElementById('rr-op').textContent='$'+porOp.toFixed(2);
+  document.getElementById('rr-sl').textContent='$'+porOp.toFixed(2);
+};
+
+window.saveRiesgo = async function(){
+  if(!db) return;
+  await setDoc(roomDoc('config/riesgo'),{
+    capital: parseFloat(document.getElementById('r-capital').value)||1000,
+    pct: parseFloat(document.getElementById('r-pct').value)||2,
+    ops: parseFloat(document.getElementById('r-ops').value)||3,
+  });
+  toast('✅ Riesgo guardado');
+};
+
+// ─── PLAN 21 ─────────────────────────────────────────────────────────────────
+window.calcPlan21 = function(){
+  const cap = parseFloat(document.getElementById('p-capital').value)||150;
+  const pct = parseFloat(document.getElementById('p-pct').value)||20;
+  const days=[];
+  let cur=cap;
+  for(let i=1;i<=21;i++){ cur=cur*(1+pct/100); days.push(cur); }
+  document.getElementById('p-d1').textContent='$'+days[0].toFixed(2);
+  document.getElementById('p-d7').textContent='$'+days[6].toFixed(2);
+  document.getElementById('p-d14').textContent='$'+days[13].toFixed(2);
+  document.getElementById('p-d21').textContent='$'+days[20].toFixed(2);
+  document.getElementById('p-ini').textContent='$'+cap.toFixed(2);
+  document.getElementById('p-fin').textContent='$'+days[20].toFixed(2);
+  document.getElementById('p-gan').textContent='$'+(days[20]-cap).toFixed(2);
+  document.getElementById('p-inc').textContent=((days[20]/cap-1)*100).toFixed(0)+'%';
+  const grid=document.getElementById('days-grid');
+  grid.innerHTML=days.map((v,i)=>{
+    const hi=[0,6,13,20].includes(i);
+    return `<div class="day-cell ${hi?'highlight':''}"><div class="dn">Día ${i+1}</div><div class="dv">$${v.toFixed(0)}</div></div>`;
+  }).join('');
+};
+
+window.savePlan21 = async function(){
+  if(!db) return;
+  await setDoc(roomDoc('config/plan21'),{
+    capital: parseFloat(document.getElementById('p-capital').value)||150,
+    pct: parseFloat(document.getElementById('p-pct').value)||20,
+  });
+  toast('✅ Plan guardado');
+};
+
+// ─── SALUD ───────────────────────────────────────────────────────────────────
+window._salud = { agua:false, estirar:false, meds:false, loz9:false, aml4:false, loz9pm:false, notas:'' };
+let _debTimer=null;
+
+window.toggleHealth = async function(key){
+  window._salud[key] = !window._salud[key];
+  renderSalud(window._salud);
+  await flushSalud();
+};
+
+window.toggleMed = async function(key){
+  window._salud[key] = !window._salud[key];
+  renderSalud(window._salud);
+  await flushSalud();
+};
+
+window.debSaveHealth = function(){
+  window._salud.notas = document.getElementById('salud-notas').value;
+  clearTimeout(_debTimer);
+  _debTimer = setTimeout(flushSalud, 800);
+};
+
+async function flushSalud(){
+  if(!db) return;
+  await setDoc(roomDoc('config/salud'), window._salud);
+}
+
+function renderSalud(d){
+  ['agua','estirar','meds'].forEach(k=>{
+    const el=document.getElementById('h-'+k);
+    if(el) el.classList.toggle('done', !!d[k]);
+  });
+  ['loz9','aml4','loz9pm'].forEach(k=>{
+    const el=document.getElementById('med-'+k);
+    if(el) el.classList.toggle('taken', !!d[k]);
+  });
+  const notasEl=document.getElementById('salud-notas');
+  if(notasEl && d.notas!==undefined && notasEl!==document.activeElement) notasEl.value=d.notas||'';
+}
+
+// ─── CHART ───────────────────────────────────────────────────────────────────
+let _chart=null;
+window.renderChart = function(){
+  const canvas=document.getElementById('pnl-chart');
+  if(!canvas) return;
+  const labels=[]; const data=[]; let acc=0;
+  window._ops.forEach((o,i)=>{ acc+=parseFloat(o.result)||0; labels.push('#'+(i+1)); data.push(parseFloat(acc.toFixed(2))); });
+  if(!labels.length){ if(_chart){_chart.destroy();_chart=null;} return; }
+  if(_chart) _chart.destroy();
+  _chart = new Chart(canvas,{
+    type:'line',
+    data:{labels,datasets:[{label:'P&L Acumulado',data,borderColor:'#00e5a0',backgroundColor:'#00e5a015',tension:.4,fill:true,pointBackgroundColor:'#00e5a0',pointRadius:5}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{ticks:{color:'#8892a4'},grid:{color:'#ffffff08'}},y:{ticks:{color:'#8892a4'},grid:{color:'#ffffff08'}}}}
+  });
+};
+
+// ─── UI ──────────────────────────────────────────────────────────────────────
+window.switchTab = function(name){
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  event.target.classList.add('active');
+};
+
+window.toast = function(msg){
+  const w=document.getElementById('toast-wrap');
+  const el=document.createElement('div');
+  el.className='toast'; el.textContent=msg; w.appendChild(el);
+  setTimeout(()=>el.remove(),2800);
+};
+
+// ─── INIT ─────────────────────────────────────────────────────────────────────
+document.getElementById('b-fecha').value = new Date().toISOString().slice(0,10);
+calcBitacora(); calcLotaje(); calcRiesgo(); calcPlan21();
+</script>
+
+<!-- Chart.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+
+</body>
+</html>
