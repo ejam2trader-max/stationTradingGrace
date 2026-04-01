@@ -315,6 +315,17 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getFirestore, doc, setDoc, getDoc, onSnapshot, collection, addDoc, deleteDoc, query, orderBy, getDocs, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 // ─── FIREBASE CONFIG ────────────────────────────────────────────────────────
+// IMPORTANTE: Reemplaza estos valores con los de tu proyecto Firebase
+const firebaseConfig = {
+  apiKey: "AIzaSyB7DKpMIT6Quw2psRpMxjHzoUCXwmEnhj0",
+  authDomain: "trading-workstation-demo.firebaseapp.com",
+  projectId: "trading-workstation-demo",
+  storageBucket: "trading-workstation-demo.appspot.com",
+  messagingSenderId: "1075471867622",
+  appId: "1:1075471867622:web:707ede01361dadc2676527"
+};
+// ────────────────────────────────────────────────────────────────────────────
+
 // Detectar room por URL o crear uno nuevo
 const params = new URLSearchParams(location.search);
 let room = params.get('room');
