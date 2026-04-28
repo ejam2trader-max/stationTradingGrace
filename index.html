@@ -32,10 +32,6 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--s
 .dot.red{background:var(--danger)}
 .dot.pulse{animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
-.deriv-bar{display:flex;align-items:center;gap:10px;padding:8px 18px;background:var(--surface2);border-bottom:1px solid var(--border);flex-wrap:wrap}
-.deriv-bar input{background:var(--surface3);border:1px solid var(--border2);color:var(--text);font-family:var(--mono);font-size:12px;border-radius:var(--r3);padding:6px 10px;width:200px;outline:none;transition:border .2s}
-.deriv-bar input:focus{border-color:var(--accent)}
-.deriv-bar label{font-size:11px;color:var(--text3);white-space:nowrap}
 .nav{display:flex;overflow-x:auto;background:var(--surface);border-bottom:1px solid var(--border);scrollbar-width:none}
 .nav::-webkit-scrollbar{display:none}
 .nav-btn{flex-shrink:0;padding:10px 16px;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--text3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap}
@@ -51,49 +47,15 @@ input:focus,select:focus,textarea:focus{border-color:var(--accent)}
 textarea{resize:vertical;min-height:70px}
 label{font-size:12px;color:var(--text2);margin-bottom:5px;display:block;font-weight:500}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
-.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:8px 15px;border-radius:var(--r2);border:none;font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap}
 .btn:active{transform:scale(.97)}
-.btn-primary{background:var(--accent);color:#000}
-.btn-primary:hover{background:var(--accent2)}
-.btn-danger{background:var(--danger);color:#fff}
-.btn-ghost{background:var(--surface2);color:var(--text2);border:1px solid var(--border2)}
-.btn-ghost:hover{color:var(--text);border-color:var(--border3)}
 .btn-sm{padding:5px 11px;font-size:12px}
 .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
 @media(min-width:580px){.metrics{grid-template-columns:repeat(4,1fr)}}
 .metric{background:var(--surface2);border-radius:var(--r2);padding:12px;border:1px solid var(--border)}
 .metric-label{font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin-bottom:5px;font-family:var(--mono)}
 .metric-value{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--text);line-height:1}
-.metric-sub{font-size:10px;color:var(--text3);margin-top:3px}
 .v-pos{color:var(--accent)}.v-neg{color:var(--danger)}.v-warn{color:var(--warn)}
-.status-bar{display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:var(--r2);margin-bottom:12px;font-size:13px;font-weight:600}
-.s-ok{background:var(--accent-dim);border:1px solid #00e5a030;color:var(--accent)}
-.s-warn{background:var(--warn-dim);border:1px solid #ffb34730;color:var(--warn)}
-.s-danger{background:var(--danger-dim);border:1px solid #ff4d6d30;color:var(--danger)}
-.tbl-wrap{overflow-x:auto;border-radius:var(--r2);border:1px solid var(--border)}
-table{width:100%;border-collapse:collapse;font-size:13px;min-width:540px}
-th{background:var(--surface2);padding:8px 12px;text-align:left;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid var(--border)}
-td{padding:9px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
-tr:last-child td{border-bottom:none}
-tr:hover td{background:#ffffff04}
-.badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;font-family:var(--mono)}
-.b-stop{background:var(--danger-dim);color:var(--danger);border:1px solid #ff4d6d30}
-.b-ok{background:var(--accent-dim);color:var(--accent);border:1px solid #00e5a030}
-.calc-block{background:var(--surface2);border-radius:var(--r2);padding:14px;margin-top:12px;border:1px solid var(--border)}
-.calc-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:13px;border-bottom:1px solid var(--border)}
-.calc-row:last-child{border-bottom:none}
-.calc-row .k{color:var(--text2)}
-.calc-row .v{font-family:var(--mono);font-weight:700;color:var(--accent);font-size:15px}
-.health-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-.hitem{background:var(--surface2);border-radius:var(--r2);padding:14px 8px;text-align:center;border:1px solid var(--border);cursor:pointer;transition:all .2s;user-select:none}
-.hitem.done{border-color:var(--accent);background:var(--accent-dim)}
-.hitem .ico{font-size:24px;margin-bottom:4px}
-.hitem .hl{font-size:11px;color:var(--text2)}
-.overlay{position:fixed;inset:0;background:#000b;z-index:500;display:flex;align-items:center;justify-content:center;padding:16px}
-.modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:20px;width:100%;max-width:460px;max-height:88vh;overflow-y:auto}
-.modal-title{font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
-.modal-actions{display:flex;gap:8px;margin-top:14px;justify-content:flex-end}
 .toasts{position:fixed;bottom:20px;right:18px;z-index:999;display:flex;flex-direction:column;gap:7px;pointer-events:none}
 .toast{padding:9px 15px;background:var(--surface3);border:1px solid var(--border2);border-radius:var(--r2);font-size:13px;color:var(--text);animation:tin .25s ease;pointer-events:all}
 @keyframes tin{from{opacity:0;transform:translateY(8px)}}
@@ -103,8 +65,8 @@ tr:hover td{background:#ffffff04}
 .feed-msg{color:var(--text2);flex:1}
 .feed-row.win .feed-msg{color:var(--accent)}
 .feed-row.loss .feed-msg{color:var(--danger)}
+.feed-row.info .feed-msg{color:var(--info)}
 .deriv-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-.empty{text-align:center;padding:28px;color:var(--text3);font-size:13px}
 </style>
 </head>
 <body>
@@ -112,24 +74,15 @@ tr:hover td{background:#ffffff04}
   <div class="topbar">
     <div class="logo">TUTOR<em>/</em>GRACE</div>
     <div class="topbar-right">
-      <button id="btn-panico" class="btn btn-danger btn-sm" onclick="activarPanicoWeb()">🚨 PÁNICO</button>
-      <div class="pill" id="deriv-pill"><div class="dot" id="deriv-dot"></div><span id="deriv-status-txt">Deriv: off</span></div>
+      <button id="btn-selah" class="btn btn-sm" style="background:var(--warn); color:#000; font-weight:bold;" onclick="activarSelah('Selah: Pausa reflexiva manual')">🛑 SELAH</button>
+      <div class="pill" id="mt5-pill"><div class="dot" id="mt5-dot"></div><span id="mt5-status-txt">MT5: Esperando</span></div>
       <div class="pill"><div class="dot green pulse" id="fb-dot"></div><span id="fb-status-txt">Firebase</span></div>
       <div class="pill" id="room-pill">Sala: <span id="room-short">8uyj1ci8qm</span></div>
     </div>
   </div>
 
-  <div class="deriv-bar">
-    <div style="display:flex;flex-direction:column;gap:2px">
-      <label>API Token Deriv (Real)</label>
-      <input type="password" id="deriv-token" placeholder="Pega tu token aquí..." autocomplete="off">
-    </div>
-    <button class="btn btn-primary btn-sm" onclick="connectDeriv()">⚡ Conectar</button>
-    <div id="deriv-account-info" style="font-size:12px;color:var(--text2)"></div>
-  </div>
-
   <nav class="nav">
-    <button class="nav-btn active" onclick="switchTab('bitacora',this)">📋 Operativa</button>
+    <button class="nav-btn active" onclick="switchTab('bitacora',this)">📋 Operativa MT5</button>
   </nav>
 
   <div class="main">
@@ -137,19 +90,21 @@ tr:hover td{background:#ffffff04}
       <div class="card">
         <div class="card-title"><span>Configuración de Riesgo Diario</span></div>
         <div class="form-row">
-          <div><label>Saldo Inicial ($)</label><input type="number" id="b-saldo" placeholder="1000" step="0.01"></div>
-          <div><label>Meta Pérdida (%)</label><input type="number" id="b-meta-perd" placeholder="1" step="0.1"></div>
+          <div><label>Saldo Inicial ($)</label><input type="number" id="b-saldo" placeholder="1000" step="0.01" oninput="evaluarLimites()"></div>
+          <div><label>Meta Pérdida (%)</label><input type="number" id="b-meta-perd" placeholder="1" step="0.1" oninput="evaluarLimites()"></div>
         </div>
       </div>
 
       <div class="card">
-        <div class="card-title"><span>Deriv — En vivo</span></div>
+        <div class="card-title"><span>MetaTrader — En vivo</span></div>
         <div class="deriv-stats">
-          <div class="metric"><div class="metric-label">Balance</div><div class="metric-value" id="dv-balance">—</div></div>
+          <div class="metric"><div class="metric-label">Balance MT5</div><div class="metric-value" id="dv-balance">—</div></div>
           <div class="metric"><div class="metric-label">Profit Hoy</div><div class="metric-value" id="dv-profit-dia">$0.00</div></div>
           <div class="metric"><div class="metric-label">Pérdida Hoy</div><div class="metric-value" id="dv-loss-dia">$0.00</div></div>
         </div>
-        <div class="live-feed" id="live-feed"></div>
+        <div class="live-feed" id="live-feed">
+          <div class="feed-row info"><span class="feed-time">--:--</span><span class="feed-msg">Esperando conexión con MetaTrader...</span></div>
+        </div>
       </div>
     </div>
   </div>
@@ -159,23 +114,24 @@ tr:hover td{background:#ffffff04}
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, setDoc, onSnapshot, collection, addDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, doc, setDoc, onSnapshot, collection, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// REEMPLAZA CON TUS CREDENCIALES WEB DE FIREBASE
+// Credenciales correctas de tu proyecto Tutor
 const firebaseConfig = {
    apiKey: "AIzaSyB4SQmFiLcPu_CELfWn6RGemDGv1pd-ow8",
-  authDomain: "tutor-d4b91.firebaseapp.com",
-  projectId: "tutor-d4b91",
-  storageBucket: "tutor-d4b91.firebasestorage.app",
-  messagingSenderId: "95935472611",
-  appId: "1:95935472611:web:abdb23f636766c4e0536d6",
-  measurementId: "G-YR8NNG6W36"
+   authDomain: "tutor-d4b91.firebaseapp.com",
+   projectId: "tutor-d4b91",
+   storageBucket: "tutor-d4b91.firebasestorage.app",
+   messagingSenderId: "95935472611",
+   appId: "1:95935472611:web:abdb23f636766c4e0536d6",
+   measurementId: "G-YR8NNG6W36"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const room = "8uyj1ci8qm"; 
 window._ops = [];
+let _mt5Timeout = null;
 
 function rdoc(p){ return doc(db,'rooms',room,p); }
 function rcol(p){ return collection(db,'rooms',room,p); }
@@ -186,62 +142,97 @@ window.toast = (msg) => {
   setTimeout(()=>t.remove(), 4000);
 };
 
-// ACTIVACIÓN DE PÁNICO MANUAL DESDE LA WEB
-window.activarPanicoWeb = async () => {
+window.switchTab = (name, btn) => {
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+};
+
+// ACTIVACIÓN DE SELAH MANUAL DESDE LA WEB
+window.activarSelah = async (razon) => {
   await setDoc(rdoc('config/lockdown'), {
     active: true,
-    unlock_at: Date.now() + (2 * 3600 * 1000), // 2 horas
-    reason: "Pánico manual activado"
+    unlock_at: Date.now() + (2 * 3600 * 1000), 
+    reason: razon
   });
-  toast('🚨 PÁNICO ACTIVADO: Bloqueando MT5');
+  toast('🛑 ' + razon);
 };
 
-const WS_URL = 'wss://ws.binaryws.com/websockets/v3?app_id=310893';
-let ws = null, _profitHoy = 0, _lossHoy = 0;
+// LISTENERS DE FIREBASE PARA MT5
+function setupListeners() {
+  onSnapshot(rdoc('account/estado'), s => {
+    if(s.exists()) updateMT5(s.data());
+  });
 
-window.connectDeriv = function(){
-  const token = document.getElementById('deriv-token').value.trim();
-  if(!token) return;
-  ws = new WebSocket(WS_URL);
-  ws.onopen = ()=> ws.send(JSON.stringify({ authorize: token }));
-  ws.onmessage = e => {
-    const msg = JSON.parse(e.data);
-    if(msg.msg_type==='authorize'){
-      ws.send(JSON.stringify({ transaction: 1, subscribe: 1 }));
-    }
-    if(msg.msg_type==='transaction'){
-      const t = msg.transaction;
-      if(t.action==='sell' || t.action==='buy') handleDerivTrade(t);
-    }
-  };
-};
-
-function handleDerivTrade(t){
-  const profit = parseFloat(t.amount||0);
-  const symbol = t.symbol || 'Deriv';
-  registerDerivOp({ profit, symbol, ts: Date.now(), derivId: t.transaction_id });
+  onSnapshot(query(rcol('ops'), orderBy('ts')), s => {
+    window._ops = s.docs.map(d => ({id: d.id, ...d.data()}));
+    window.evaluarLimites();
+  });
 }
 
-async function registerDerivOp({profit, symbol, ts, derivId}){
-  if(profit > 0) _profitHoy += profit;
-  else _lossHoy += Math.abs(profit);
+function updateMT5(d) {
+  clearTimeout(_mt5Timeout);
+  document.getElementById('mt5-dot').className = 'dot green pulse';
+  document.getElementById('mt5-status-txt').textContent = 'MT5: Online';
   
+  document.getElementById('dv-balance').textContent = '$' + parseFloat(d.balance||0).toFixed(2);
+  
+  const curTime = new Date().toLocaleTimeString('es', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+  feedLog('info', `Latido MT5 -> Balance: $${parseFloat(d.balance||0).toFixed(2)} | Equidad: $${parseFloat(d.equity||0).toFixed(2)}`);
+
+  _mt5Timeout = setTimeout(() => {
+    document.getElementById('mt5-dot').className = 'dot red pulse';
+    document.getElementById('mt5-status-txt').textContent = 'MT5: Offline';
+  }, 45000);
+}
+
+window.evaluarLimites = async () => {
+  let profitHoy = 0, lossHoy = 0;
+  
+  // Filtrar operaciones de hoy
+  const hoyStr = new Date().toISOString().slice(0,10);
+  const opsHoy = window._ops.filter(o => {
+      if(!o.ts) return false;
+      const f = new Date(parseInt(o.ts)).toISOString().slice(0,10);
+      return f === hoyStr;
+  });
+
+  opsHoy.forEach(o => {
+    const r = parseFloat(o.result||0);
+    if(r > 0) profitHoy += r;
+    else lossHoy += Math.abs(r);
+  });
+
+  document.getElementById('dv-profit-dia').textContent = '$' + profitHoy.toFixed(2);
+  document.getElementById('dv-loss-dia').textContent = '$' + lossHoy.toFixed(2);
+
   const saldo = parseFloat(document.getElementById('b-saldo').value)||0;
   const metaperd = parseFloat(document.getElementById('b-meta-perd').value)||1;
-  const mPerd = saldo * metaperd / 100;
-  const currentPnl = _profitHoy - _lossHoy;
-  const parar = currentPnl <= -mPerd ? 'SI' : 'NO';
+  
+  if (saldo > 0) {
+    const mPerd = saldo * metaperd / 100;
+    const currentPnl = profitHoy - lossHoy;
 
-  // EL CEREBRO: LA INYECCIÓN QUE BLOQUEA TU MT5
-  if(parar === 'SI') {
-    await setDoc(rdoc('config/lockdown'), {
-      active: true,
-      unlock_at: Date.now() + (2 * 3600 * 1000),
-      reason: "Límite de pérdida alcanzado"
-    });
-    toast('🚨 MODO REGULACIÓN: Guardián activado');
+    if(currentPnl <= -mPerd && currentPnl < 0) {
+      await activarSelah("Límite de pérdida alcanzado. Guardián activado.");
+    }
   }
+};
+
+function feedLog(type, msg) {
+  const feed = document.getElementById('live-feed');
+  const now = new Date().toLocaleTimeString('es', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+  const row = document.createElement('div');
+  row.className = `feed-row ${type}`;
+  row.innerHTML = `<span class="feed-time">${now}</span><span class="feed-msg">${msg}</span>`;
+  feed.prepend(row);
+  while(feed.children.length > 50) feed.removeChild(feed.lastChild);
 }
+
+// Inicializar conexión
+setupListeners();
+
 </script>
 </body>
 </html>
