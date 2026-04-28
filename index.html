@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>EA Trading Workstation</title>
+<title>TutorGrace - Workstation</title>
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -19,11 +19,8 @@
   --r:14px;--r2:9px;--r3:6px;
 }
 html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--sans);font-size:15px;overflow-x:hidden}
-/* SCROLLBAR */
 ::-webkit-scrollbar{width:4px;height:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border3);border-radius:4px}
-/* LAYOUT */
 .app{display:flex;flex-direction:column;min-height:100vh}
-/* TOPBAR */
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:0 18px;height:52px;background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;gap:10px}
 .logo{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--accent);white-space:nowrap;letter-spacing:.5px}
 .logo em{color:var(--text3);font-style:normal}
@@ -35,32 +32,26 @@ html,body{height:100%;background:var(--bg);color:var(--text);font-family:var(--s
 .dot.red{background:var(--danger)}
 .dot.pulse{animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.25}}
-/* DERIV BAR */
 .deriv-bar{display:flex;align-items:center;gap:10px;padding:8px 18px;background:var(--surface2);border-bottom:1px solid var(--border);flex-wrap:wrap}
 .deriv-bar input{background:var(--surface3);border:1px solid var(--border2);color:var(--text);font-family:var(--mono);font-size:12px;border-radius:var(--r3);padding:6px 10px;width:200px;outline:none;transition:border .2s}
 .deriv-bar input:focus{border-color:var(--accent)}
 .deriv-bar label{font-size:11px;color:var(--text3);white-space:nowrap}
-/* NAV */
 .nav{display:flex;overflow-x:auto;background:var(--surface);border-bottom:1px solid var(--border);scrollbar-width:none}
 .nav::-webkit-scrollbar{display:none}
 .nav-btn{flex-shrink:0;padding:10px 16px;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--text3);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;transition:all .2s;white-space:nowrap}
 .nav-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
 .nav-btn:hover:not(.active){color:var(--text)}
-/* MAIN */
 .main{flex:1;padding:16px;max-width:960px;margin:0 auto;width:100%}
 .tab{display:none}.tab.active{display:block}
-/* CARDS */
 .card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;margin-bottom:12px}
 .card-title{font-family:var(--mono);font-size:10px;color:var(--text3);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .card-title span{flex:1}
-/* INPUTS */
 input[type=text],input[type=number],input[type=password],input[type=date],select,textarea{background:var(--surface2);border:1px solid var(--border2);color:var(--text);font-family:var(--sans);font-size:14px;border-radius:var(--r2);padding:9px 12px;width:100%;outline:none;transition:border .2s}
 input:focus,select:focus,textarea:focus{border-color:var(--accent)}
 textarea{resize:vertical;min-height:70px}
 label{font-size:12px;color:var(--text2);margin-bottom:5px;display:block;font-weight:500}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px}
 .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:10px}
-/* BUTTONS */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:5px;padding:8px 15px;border-radius:var(--r2);border:none;font-family:var(--sans);font-size:13px;font-weight:600;cursor:pointer;transition:all .15s;white-space:nowrap}
 .btn:active{transform:scale(.97)}
 .btn-primary{background:var(--accent);color:#000}
@@ -69,8 +60,6 @@ label{font-size:12px;color:var(--text2);margin-bottom:5px;display:block;font-wei
 .btn-ghost{background:var(--surface2);color:var(--text2);border:1px solid var(--border2)}
 .btn-ghost:hover{color:var(--text);border-color:var(--border3)}
 .btn-sm{padding:5px 11px;font-size:12px}
-.btn-icon{padding:6px;width:32px;height:32px}
-/* METRICS */
 .metrics{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:12px}
 @media(min-width:580px){.metrics{grid-template-columns:repeat(4,1fr)}}
 .metric{background:var(--surface2);border-radius:var(--r2);padding:12px;border:1px solid var(--border)}
@@ -78,12 +67,10 @@ label{font-size:12px;color:var(--text2);margin-bottom:5px;display:block;font-wei
 .metric-value{font-family:var(--mono);font-size:18px;font-weight:700;color:var(--text);line-height:1}
 .metric-sub{font-size:10px;color:var(--text3);margin-top:3px}
 .v-pos{color:var(--accent)}.v-neg{color:var(--danger)}.v-warn{color:var(--warn)}
-/* STATUS BAR */
 .status-bar{display:flex;align-items:center;gap:8px;padding:9px 14px;border-radius:var(--r2);margin-bottom:12px;font-size:13px;font-weight:600}
 .s-ok{background:var(--accent-dim);border:1px solid #00e5a030;color:var(--accent)}
 .s-warn{background:var(--warn-dim);border:1px solid #ffb34730;color:var(--warn)}
 .s-danger{background:var(--danger-dim);border:1px solid #ff4d6d30;color:var(--danger)}
-/* TABLE */
 .tbl-wrap{overflow-x:auto;border-radius:var(--r2);border:1px solid var(--border)}
 table{width:100%;border-collapse:collapse;font-size:13px;min-width:540px}
 th{background:var(--surface2);padding:8px 12px;text-align:left;font-size:10px;font-weight:700;color:var(--text3);letter-spacing:.8px;text-transform:uppercase;border-bottom:1px solid var(--border)}
@@ -93,656 +80,168 @@ tr:hover td{background:#ffffff04}
 .badge{display:inline-block;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:700;font-family:var(--mono)}
 .b-stop{background:var(--danger-dim);color:var(--danger);border:1px solid #ff4d6d30}
 .b-ok{background:var(--accent-dim);color:var(--accent);border:1px solid #00e5a030}
-.b-auto{background:var(--info-dim);color:var(--info);border:1px solid #4d9fff30}
-.b-buy{background:#4d9fff15;color:var(--info)}
-.b-sell{background:#ff4d6d15;color:var(--danger)}
-/* CALC */
 .calc-block{background:var(--surface2);border-radius:var(--r2);padding:14px;margin-top:12px;border:1px solid var(--border)}
 .calc-row{display:flex;justify-content:space-between;align-items:center;padding:6px 0;font-size:13px;border-bottom:1px solid var(--border)}
 .calc-row:last-child{border-bottom:none}
 .calc-row .k{color:var(--text2)}
 .calc-row .v{font-family:var(--mono);font-weight:700;color:var(--accent);font-size:15px}
-/* DAYS GRID */
-.days-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-top:12px}
-.day-cell{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r2);padding:10px 6px;text-align:center;transition:border .2s}
-.day-cell.hi{border-color:var(--accent);background:var(--accent-dim)}
-.day-cell .dn{font-size:9px;color:var(--text3);margin-bottom:3px;font-family:var(--mono)}
-.day-cell .dv{font-family:var(--mono);font-size:13px;font-weight:700}
-/* HEALTH */
 .health-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
 .hitem{background:var(--surface2);border-radius:var(--r2);padding:14px 8px;text-align:center;border:1px solid var(--border);cursor:pointer;transition:all .2s;user-select:none}
 .hitem.done{border-color:var(--accent);background:var(--accent-dim)}
 .hitem .ico{font-size:24px;margin-bottom:4px}
 .hitem .hl{font-size:11px;color:var(--text2)}
-.med-row{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--surface2);border-radius:var(--r2);margin-bottom:6px;border:1px solid var(--border);cursor:pointer;transition:all .2s}
-.med-row.taken{border-color:var(--accent2);background:var(--accent-dim)}
-.med-name{font-size:13px;font-weight:600}.med-time{font-size:11px;color:var(--text2);margin-top:1px}
-.chk{width:22px;height:22px;border-radius:50%;border:2px solid var(--border3);display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;transition:all .2s}
-.med-row.taken .chk{background:var(--accent);border-color:var(--accent);color:#000;font-weight:700}
-/* CHART */
-.chart-wrap{position:relative;height:180px;margin-top:12px}
-/* MODAL */
 .overlay{position:fixed;inset:0;background:#000b;z-index:500;display:flex;align-items:center;justify-content:center;padding:16px}
 .modal{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r);padding:20px;width:100%;max-width:460px;max-height:88vh;overflow-y:auto}
 .modal-title{font-family:var(--mono);font-size:11px;color:var(--accent);margin-bottom:16px;text-transform:uppercase;letter-spacing:1px}
 .modal-actions{display:flex;gap:8px;margin-top:14px;justify-content:flex-end}
-/* TOAST */
 .toasts{position:fixed;bottom:20px;right:18px;z-index:999;display:flex;flex-direction:column;gap:7px;pointer-events:none}
 .toast{padding:9px 15px;background:var(--surface3);border:1px solid var(--border2);border-radius:var(--r2);font-size:13px;color:var(--text);animation:tin .25s ease;pointer-events:all}
 @keyframes tin{from{opacity:0;transform:translateY(8px)}}
-/* DERIV LIVE FEED */
 .live-feed{background:var(--surface2);border:1px solid var(--border);border-radius:var(--r2);max-height:160px;overflow-y:auto;padding:8px;margin-bottom:12px}
 .feed-row{font-family:var(--mono);font-size:11px;color:var(--text3);padding:3px 0;border-bottom:1px solid var(--border);display:flex;gap:10px;align-items:center}
-.feed-row:last-child{border-bottom:none}
 .feed-time{color:var(--text3);flex-shrink:0}
 .feed-msg{color:var(--text2);flex:1}
 .feed-row.win .feed-msg{color:var(--accent)}
 .feed-row.loss .feed-msg{color:var(--danger)}
-.feed-row.info .feed-msg{color:var(--info)}
-/* DERIV STATS */
 .deriv-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
-/* EMPTY */
 .empty{text-align:center;padding:28px;color:var(--text3);font-size:13px}
-hr{border:none;border-top:1px solid var(--border);margin:14px 0}
-/* RESPONSIVE */
-@media(max-width:500px){
-  .form-row,.form-row-3{grid-template-columns:1fr}
-  .metrics{grid-template-columns:1fr 1fr}
-  .deriv-stats{grid-template-columns:1fr 1fr}
-  .main{padding:12px}
-  .deriv-bar input{width:140px}
-}
 </style>
 </head>
 <body>
 <div class="app">
-
-  <!-- TOPBAR -->
   <div class="topbar">
-    <div class="logo">EA<em>/</em>TRADING <em style="font-size:10px">WORKSTATION</em></div>
+    <div class="logo">TUTOR<em>/</em>GRACE</div>
     <div class="topbar-right">
-      <div class="pill" id="deriv-pill"><div class="dot" id="deriv-dot"></div><span id="deriv-status-txt">Deriv: desconectado</span></div>
+      <button id="btn-panico" class="btn btn-danger btn-sm" onclick="activarPanicoWeb()">🚨 PÁNICO</button>
+      <div class="pill" id="deriv-pill"><div class="dot" id="deriv-dot"></div><span id="deriv-status-txt">Deriv: off</span></div>
       <div class="pill"><div class="dot green pulse" id="fb-dot"></div><span id="fb-status-txt">Firebase</span></div>
-      <div class="pill" id="room-pill" style="cursor:pointer" title="Copiar enlace" onclick="copyRoomLink()">🔗 <span id="room-short">---</span></div>
+      <div class="pill" id="room-pill">Sala: <span id="room-short">8uyj1ci8qm</span></div>
     </div>
   </div>
 
-  <!-- DERIV CONNECTION BAR -->
   <div class="deriv-bar">
     <div style="display:flex;flex-direction:column;gap:2px">
-      <label>API Token Deriv (cuenta real)</label>
-      <input type="password" id="deriv-token" placeholder="Pega tu token aquí…" autocomplete="off">
+      <label>API Token Deriv (Real)</label>
+      <input type="password" id="deriv-token" placeholder="Pega tu token aquí..." autocomplete="off">
     </div>
     <button class="btn btn-primary btn-sm" onclick="connectDeriv()">⚡ Conectar</button>
-    <button class="btn btn-ghost btn-sm" onclick="disconnectDeriv()">✕ Desconectar</button>
     <div id="deriv-account-info" style="font-size:12px;color:var(--text2)"></div>
   </div>
 
-  <!-- NAV -->
   <nav class="nav">
-    <button class="nav-btn active" onclick="switchTab('bitacora',this)">📋 Bitácora</button>
-    <button class="nav-btn" onclick="switchTab('calculadora',this)">⚡ Calculadora</button>
-    <button class="nav-btn" onclick="switchTab('riesgo',this)">🛡 Riesgo</button>
-    <button class="nav-btn" onclick="switchTab('plan21',this)">📈 21 Días</button>
-    <button class="nav-btn" onclick="switchTab('salud',this)">❤️ Salud</button>
+    <button class="nav-btn active" onclick="switchTab('bitacora',this)">📋 Operativa</button>
   </nav>
 
   <div class="main">
-
-    <!-- ═══════════════════════ BITACORA ═══════════════════════ -->
     <div id="tab-bitacora" class="tab active">
-
-      <!-- CONFIG -->
       <div class="card">
-        <div class="card-title"><span>Configuración del día</span>
-          <button class="btn btn-ghost btn-sm" onclick="saveDayConfig()">💾 Guardar</button>
-        </div>
+        <div class="card-title"><span>Configuración de Riesgo Diario</span></div>
         <div class="form-row">
-          <div><label>Saldo Inicial ($)</label><input type="number" id="b-saldo" placeholder="1000" step="0.01" oninput="calcBitacora()"></div>
-          <div><label>Fecha</label><input type="date" id="b-fecha"></div>
-        </div>
-        <div class="form-row">
-          <div><label>Meta Ganancia (%)</label><input type="number" id="b-meta-gan" placeholder="3" step="0.1" oninput="calcBitacora()"></div>
-          <div><label>Meta Pérdida (%)</label><input type="number" id="b-meta-perd" placeholder="1" step="0.1" oninput="calcBitacora()"></div>
+          <div><label>Saldo Inicial ($)</label><input type="number" id="b-saldo" placeholder="1000" step="0.01"></div>
+          <div><label>Meta Pérdida (%)</label><input type="number" id="b-meta-perd" placeholder="1" step="0.1"></div>
         </div>
       </div>
 
-      <!-- DERIV LIVE STATS -->
       <div class="card">
-        <div class="card-title"><span>Deriv — En vivo</span>
-          <div class="dot pulse" id="live-dot" style="background:var(--text3)"></div>
-        </div>
+        <div class="card-title"><span>Deriv — En vivo</span></div>
         <div class="deriv-stats">
-          <div class="metric"><div class="metric-label">Balance</div><div class="metric-value" id="dv-balance">—</div><div class="metric-sub">Cuenta real</div></div>
-          <div class="metric"><div class="metric-label">Profit Hoy</div><div class="metric-value" id="dv-profit-dia">$0.00</div><div class="metric-sub">Operaciones cerradas</div></div>
-          <div class="metric"><div class="metric-label">Pérdida Hoy</div><div class="metric-value" id="dv-loss-dia">$0.00</div><div class="metric-sub">Suma de pérdidas</div></div>
+          <div class="metric"><div class="metric-label">Balance</div><div class="metric-value" id="dv-balance">—</div></div>
+          <div class="metric"><div class="metric-label">Profit Hoy</div><div class="metric-value" id="dv-profit-dia">$0.00</div></div>
+          <div class="metric"><div class="metric-label">Pérdida Hoy</div><div class="metric-value" id="dv-loss-dia">$0.00</div></div>
         </div>
-        <div class="live-feed" id="live-feed">
-          <div class="feed-row info"><span class="feed-time">--:--</span><span class="feed-msg">Conecta tu token Deriv para ver operaciones en tiempo real…</span></div>
-        </div>
+        <div class="live-feed" id="live-feed"></div>
       </div>
-
-      <!-- MÉTRICAS -->
-      <div class="metrics">
-        <div class="metric"><div class="metric-label">Meta Ganancia</div><div class="metric-value" id="m-meta-gan">—</div></div>
-        <div class="metric"><div class="metric-label">Meta Pérdida</div><div class="metric-value" id="m-meta-perd">—</div></div>
-        <div class="metric"><div class="metric-label">P&L Acumulado</div><div class="metric-value" id="m-pnl">$0.00</div></div>
-        <div class="metric"><div class="metric-label">% P&L</div><div class="metric-value" id="m-pnl-pct">0.00%</div></div>
-      </div>
-      <div id="b-status" class="status-bar s-ok">✅ EN PROCESO — CONTINUAR OPERANDO</div>
-
-      <!-- ACCIONES -->
-      <div style="display:flex;gap:8px;margin-bottom:12px;flex-wrap:wrap">
-        <button class="btn btn-primary" onclick="openAddOp()">+ Agregar manual</button>
-        <button class="btn btn-ghost" onclick="clearDay()">🗑 Limpiar día</button>
-        <button class="btn btn-ghost" onclick="exportCSV()">📥 Exportar CSV</button>
-      </div>
-
-      <!-- TABLA -->
-      <div class="tbl-wrap">
-        <table>
-          <thead><tr>
-            <th>#</th><th>Activo</th><th>Tipo</th><th>Resultado</th><th>Acumulado</th><th>Origen</th><th>¿Parar?</th><th>Notas</th><th></th>
-          </tr></thead>
-          <tbody id="ops-tbody"><tr><td colspan="9" class="empty">Sin operaciones.</td></tr></tbody>
-        </table>
-      </div>
-
-      <div class="chart-wrap"><canvas id="pnl-chart"></canvas></div>
-    </div>
-
-    <!-- ═══════════════════════ CALCULADORA ═══════════════════════ -->
-    <div id="tab-calculadora" class="tab">
-      <div class="card">
-        <div class="card-title"><span>Calculadora de Lotaje</span></div>
-        <div class="form-row">
-          <div><label>Puntos / Distancia TP</label><input type="number" id="c-puntos" value="21" step="1" oninput="calcLotaje()"></div>
-          <div><label>Stop Loss ($)</label><input type="number" id="c-sl" value="1" step="0.01" oninput="calcLotaje()"></div>
-        </div>
-        <div class="calc-block">
-          <div class="calc-row"><span class="k">PROFIT (SL × 3)</span><span class="v" id="cr-profit">3.00</span></div>
-          <div class="calc-row"><span class="k">LOTAJE (SL ÷ Puntos)</span><span class="v" id="cr-lotaje">0.0476</span></div>
-          <div class="calc-row"><span class="k">2 ENTRADAS (Lotaje ÷ 2)</span><span class="v" id="cr-2ent">0.0238</span></div>
-          <div class="calc-row"><span class="k">RIESGO (SL × Lotaje)</span><span class="v" id="cr-riesgo">0.0476</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════ RIESGO ═══════════════════════ -->
-    <div id="tab-riesgo" class="tab">
-      <div class="card">
-        <div class="card-title"><span>Gestión de Riesgo Diario</span>
-          <button class="btn btn-ghost btn-sm" onclick="saveRiesgo()">💾 Guardar</button>
-        </div>
-        <div class="form-row-3">
-          <div><label>Capital ($)</label><input type="number" id="r-capital" value="1000" step="10" oninput="calcRiesgo()"></div>
-          <div><label>% Riesgo Diario</label><input type="number" id="r-pct" value="2" step="0.1" oninput="calcRiesgo()"></div>
-          <div><label>N° Operaciones</label><input type="number" id="r-ops" value="3" step="1" oninput="calcRiesgo()"></div>
-        </div>
-        <div class="calc-block">
-          <div class="calc-row"><span class="k">RIESGO DIARIO</span><span class="v" id="rr-diario">$20.00</span></div>
-          <div class="calc-row"><span class="k">RIESGO POR OPERACIÓN</span><span class="v" id="rr-op">$6.67</span></div>
-          <div class="calc-row"><span class="k">STOP LOSS POR OPERACIÓN</span><span class="v" id="rr-sl">$6.67</span></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════ PLAN 21 ═══════════════════════ -->
-    <div id="tab-plan21" class="tab">
-      <div class="card">
-        <div class="card-title"><span>Plan 21 Días — Interés Compuesto</span>
-          <button class="btn btn-ghost btn-sm" onclick="savePlan21()">💾 Guardar</button>
-        </div>
-        <div class="form-row">
-          <div><label>Capital Inicial ($)</label><input type="number" id="p-capital" value="150" step="10" oninput="calcPlan21()"></div>
-          <div><label>% Diario</label><input type="number" id="p-pct" value="20" step="0.1" oninput="calcPlan21()"></div>
-        </div>
-        <div class="metrics" style="margin-top:12px">
-          <div class="metric"><div class="metric-label">Día 1</div><div class="metric-value v-pos" id="p-d1">—</div></div>
-          <div class="metric"><div class="metric-label">Día 7</div><div class="metric-value v-pos" id="p-d7">—</div></div>
-          <div class="metric"><div class="metric-label">Día 14</div><div class="metric-value v-pos" id="p-d14">—</div></div>
-          <div class="metric"><div class="metric-label">Día 21</div><div class="metric-value v-pos" id="p-d21">—</div></div>
-        </div>
-        <div class="metrics">
-          <div class="metric"><div class="metric-label">Inicial</div><div class="metric-value" id="p-ini">—</div></div>
-          <div class="metric"><div class="metric-label">Final</div><div class="metric-value v-pos" id="p-fin">—</div></div>
-          <div class="metric"><div class="metric-label">Ganancia</div><div class="metric-value v-pos" id="p-gan">—</div></div>
-          <div class="metric"><div class="metric-label">Incremento</div><div class="metric-value v-pos" id="p-inc">—</div></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title"><span>Progresión diaria</span></div>
-        <div class="days-grid" id="days-grid"></div>
-      </div>
-    </div>
-
-    <!-- ═══════════════════════ SALUD ═══════════════════════ -->
-    <div id="tab-salud" class="tab">
-      <div class="card">
-        <div class="card-title"><span>Rutina del Día</span></div>
-        <div class="health-grid">
-          <div class="hitem" id="h-agua" onclick="toggleHealth('agua')"><div class="ico">💧</div><div class="hl">Agua</div></div>
-          <div class="hitem" id="h-estirar" onclick="toggleHealth('estirar')"><div class="ico">🤸</div><div class="hl">Estirar</div></div>
-          <div class="hitem" id="h-meds" onclick="toggleHealth('meds')"><div class="ico">💊</div><div class="hl">Medicamentos</div></div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-title"><span>Medicamentos</span></div>
-        <div class="med-row" id="med-loz9" onclick="toggleMed('loz9')"><div><div class="med-name">Losartán</div><div class="med-time">9:00 AM</div></div><div class="chk" id="chk-loz9">✓</div></div>
-        <div class="med-row" id="med-aml4" onclick="toggleMed('aml4')"><div><div class="med-name">Amlodipina</div><div class="med-time">4:00 PM</div></div><div class="chk" id="chk-aml4">✓</div></div>
-        <div class="med-row" id="med-loz9pm" onclick="toggleMed('loz9pm')"><div><div class="med-name">Losartán</div><div class="med-time">9:00 PM</div></div><div class="chk" id="chk-loz9pm">✓</div></div>
-      </div>
-      <div class="card">
-        <div class="card-title"><span>Notas de Salud</span></div>
-        <textarea id="salud-notas" placeholder="Cómo te sientes hoy…" oninput="debSaveHealth()"></textarea>
-      </div>
-    </div>
-
-  </div><!-- end main -->
-</div><!-- end app -->
-
-<!-- MODAL AGREGAR OP MANUAL -->
-<div id="modal-add" class="overlay" style="display:none">
-  <div class="modal">
-    <div class="modal-title">Nueva Operación Manual</div>
-    <div style="margin-bottom:10px"><label>Activo</label><input type="text" id="op-activo" placeholder="XAUUSD, R_100…"></div>
-    <div style="margin-bottom:10px">
-      <label>Tipo</label>
-      <select id="op-tipo"><option value="BUY">BUY (Compra)</option><option value="SELL">SELL (Venta)</option><option value="">—</option></select>
-    </div>
-    <div style="margin-bottom:10px"><label>Resultado ($) — positivo=ganancia, negativo=pérdida</label><input type="number" id="op-result" placeholder="+50 o -20" step="0.01"></div>
-    <div style="margin-bottom:10px"><label>Notas</label><textarea id="op-notas" placeholder="Estrategia, observaciones…"></textarea></div>
-    <div class="modal-actions">
-      <button class="btn btn-ghost" onclick="closeModal()">Cancelar</button>
-      <button class="btn btn-primary" onclick="addOpManual()">Agregar</button>
     </div>
   </div>
 </div>
 
 <div class="toasts" id="toasts"></div>
 
-<!-- ═══════════════════ SCRIPTS ═══════════════════ -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
-
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, doc, setDoc, onSnapshot, collection, addDoc, deleteDoc, query, orderBy, getDocs, writeBatch } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+import { getFirestore, doc, setDoc, onSnapshot, collection, addDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-// ══════════════════════════════════════════════════════════
-//  🔧 REEMPLAZA ESTOS VALORES CON LOS DE TU PROYECTO FIREBASE
-// ══════════════════════════════════════════════════════════
+// REEMPLAZA CON TUS CREDENCIALES WEB DE FIREBASE
 const firebaseConfig = {
-  apiKey: "TU_API_KEY_AQUI",
-  authDomain: "TU_PROYECTO.firebaseapp.com",
-  projectId: "TU_PROYECTO_ID",
-  storageBucket: "TU_PROYECTO.appspot.com",
-  messagingSenderId: "TU_SENDER_ID",
-  appId: "TU_APP_ID"
+   apiKey: "AIzaSyB4SQmFiLcPu_CELfWn6RGemDGv1pd-ow8",
+  authDomain: "tutor-d4b91.firebaseapp.com",
+  projectId: "tutor-d4b91",
+  storageBucket: "tutor-d4b91.firebasestorage.app",
+  messagingSenderId: "95935472611",
+  appId: "1:95935472611:web:abdb23f636766c4e0536d6",
+  measurementId: "G-YR8NNG6W36"
 };
-// ══════════════════════════════════════════════════════════
 
-// ─── ROOM ────────────────────────────────────────────────
-const params = new URLSearchParams(location.search);
-let room = params.get('room');
-if(!room){ room=Math.random().toString(36).slice(2,12); const u=new URL(location.href); u.searchParams.set('room',room); history.replaceState({},''  ,u); }
-document.getElementById('room-short').textContent = room.slice(0,10);
-
-window.copyRoomLink = ()=>{ navigator.clipboard.writeText(location.href); toast('🔗 Enlace copiado'); };
-
-// ─── FIREBASE ────────────────────────────────────────────
-let db = null;
-try{
-  const app = initializeApp(firebaseConfig);
-  db = getFirestore(app);
-  setupFirebase();
-  document.getElementById('fb-dot').style.background='var(--accent)';
-  document.getElementById('fb-status-txt').textContent='Firebase ✓';
-}catch(e){
-  document.getElementById('fb-dot').style.background='var(--warn)';
-  document.getElementById('fb-status-txt').textContent='Local';
-}
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const room = "8uyj1ci8qm"; 
+window._ops = [];
 
 function rdoc(p){ return doc(db,'rooms',room,p); }
 function rcol(p){ return collection(db,'rooms',room,p); }
 
-function setupFirebase(){
-  onSnapshot(rdoc('config/day'), s=>{ if(!s.exists()) return; const d=s.data(); if(d.saldo) document.getElementById('b-saldo').value=d.saldo; if(d.fecha) document.getElementById('b-fecha').value=d.fecha; if(d.metagan) document.getElementById('b-meta-gan').value=d.metagan; if(d.metaperd) document.getElementById('b-meta-perd').value=d.metaperd; calcBitacora(); });
-  const q=query(rcol('ops'),orderBy('ts'));
-  onSnapshot(q, s=>{ window._ops=s.docs.map(d=>({id:d.id,...d.data()})); renderOps(); calcBitacora(); });
-  onSnapshot(rdoc('config/riesgo'), s=>{ if(!s.exists()) return; const d=s.data(); if(d.capital) document.getElementById('r-capital').value=d.capital; if(d.pct) document.getElementById('r-pct').value=d.pct; if(d.ops) document.getElementById('r-ops').value=d.ops; calcRiesgo(); });
-  onSnapshot(rdoc('config/plan21'), s=>{ if(!s.exists()) return; const d=s.data(); if(d.capital) document.getElementById('p-capital').value=d.capital; if(d.pct) document.getElementById('p-pct').value=d.pct; calcPlan21(); });
-  onSnapshot(rdoc('config/salud'), s=>{ if(!s.exists()) return; window._salud=s.data(); renderSalud(s.data()); });
-  onSnapshot(rdoc('config/deriv'), s=>{ if(!s.exists()) return; const d=s.data(); if(d.token){ document.getElementById('deriv-token').value=d.token; connectDeriv(); } });
-}
+window.toast = (msg) => {
+  const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg;
+  document.getElementById('toasts').appendChild(t);
+  setTimeout(()=>t.remove(), 4000);
+};
 
-// ─── DERIV WEBSOCKET ────────────────────────────────────
-const WS_URL = 'wss://ws.binaryws.com/websockets/v3?app_id=1089';
-let ws = null, _wsAlive = false, _heartbeat = null;
-let _profitHoy = 0, _lossHoy = 0;
+// ACTIVACIÓN DE PÁNICO MANUAL DESDE LA WEB
+window.activarPanicoWeb = async () => {
+  await setDoc(rdoc('config/lockdown'), {
+    active: true,
+    unlock_at: Date.now() + (2 * 3600 * 1000), // 2 horas
+    reason: "Pánico manual activado"
+  });
+  toast('🚨 PÁNICO ACTIVADO: Bloqueando MT5');
+};
+
+const WS_URL = 'wss://ws.binaryws.com/websockets/v3?app_id=310893';
+let ws = null, _profitHoy = 0, _lossHoy = 0;
 
 window.connectDeriv = function(){
   const token = document.getElementById('deriv-token').value.trim();
-  if(!token){ toast('⚠ Ingresa tu token Deriv'); return; }
-  if(ws){ ws.close(); }
-  setDerivStatus('connecting');
+  if(!token) return;
   ws = new WebSocket(WS_URL);
-
-  ws.onopen = ()=>{
-    setDerivStatus('connected');
-    ws.send(JSON.stringify({ authorize: token }));
-    // Guardar token en Firebase
-    if(db) setDoc(rdoc('config/deriv'),{token}).catch(()=>{});
-    // Heartbeat para mantener conexión
-    _heartbeat = setInterval(()=>{ if(ws && ws.readyState===1) ws.send(JSON.stringify({ping:1})); },25000);
-  };
-
-  ws.onmessage = e=>{
+  ws.onopen = ()=> ws.send(JSON.stringify({ authorize: token }));
+  ws.onmessage = e => {
     const msg = JSON.parse(e.data);
-    if(msg.error){ feedLog('error',`Error: ${msg.error.message}`); return; }
-
-    // Autorización exitosa
     if(msg.msg_type==='authorize'){
-      const acc = msg.authorize;
-      document.getElementById('deriv-account-info').textContent = `${acc.loginid} | ${acc.currency} | Balance: ${acc.balance}`;
-      document.getElementById('dv-balance').textContent = `${acc.currency} ${parseFloat(acc.balance).toFixed(2)}`;
-      feedLog('info',`✓ Conectado como ${acc.loginid} — ${acc.email||''}`);
-      // Suscribir a transacciones
       ws.send(JSON.stringify({ transaction: 1, subscribe: 1 }));
-      // Suscribir a historial de operaciones abiertas
-      ws.send(JSON.stringify({ portfolio: 1, subscribe: 1 }));
-      // Cargar operaciones del día de hoy desde historial
-      loadTodayHistory(token);
     }
-
-    // TRANSACTION — trade cerrado en tiempo real
     if(msg.msg_type==='transaction'){
       const t = msg.transaction;
-      if(t.action==='sell' || t.action==='buy'){
-        handleDerivTrade(t);
-      }
-      // Actualizar balance
-      if(t.balance !== undefined){
-        document.getElementById('dv-balance').textContent = `${t.currency||'USD'} ${parseFloat(t.balance).toFixed(2)}`;
-      }
-    }
-
-    // Historial cargado
-    if(msg.msg_type==='profit_table'){
-      const trades = msg.profit_table.transactions || [];
-      trades.forEach(t=> handleDerivTradeHistory(t));
+      if(t.action==='sell' || t.action==='buy') handleDerivTrade(t);
     }
   };
-
-  ws.onerror = ()=>{ setDerivStatus('error'); feedLog('error','Error de conexión WebSocket'); };
-  ws.onclose = ()=>{ setDerivStatus('disconnected'); clearInterval(_heartbeat); feedLog('info','Conexión cerrada'); };
 };
-
-window.disconnectDeriv = function(){
-  if(ws) ws.close();
-  if(db) setDoc(rdoc('config/deriv'),{token:''}).catch(()=>{});
-  document.getElementById('deriv-token').value='';
-  document.getElementById('deriv-account-info').textContent='';
-  setDerivStatus('disconnected');
-};
-
-function loadTodayHistory(token){
-  // Cargar operaciones del día de hoy via profit_table
-  const todayStart = Math.floor(new Date().setHours(0,0,0,0)/1000);
-  const now = Math.floor(Date.now()/1000);
-  ws.send(JSON.stringify({ profit_table: 1, description: 1, sort: 'DESC', date_from: todayStart, date_to: now, limit: 100 }));
-}
-
-function handleDerivTradeHistory(t){
-  // Procesar historial del día (evitar duplicados por contract_id)
-  const existsId = window._ops.find(o=>o.derivId===t.contract_id);
-  if(existsId) return;
-  const profit = parseFloat(t.sell_price||0) - parseFloat(t.buy_price||0);
-  const ts = (t.sell_time||t.purchase_time||0)*1000;
-  const today = new Date().toDateString();
-  const tradeDate = new Date(ts).toDateString();
-  if(tradeDate !== today) return;
-  registerDerivOp({ profit, symbol: t.shortcode||t.display_name||'Deriv', tipo: t.transaction_type||'—', ts, derivId: t.contract_id });
-}
 
 function handleDerivTrade(t){
-  // Operación en tiempo real (action=sell = cierre de trade)
   const profit = parseFloat(t.amount||0);
-  const symbol = t.symbol || t.display_name || 'Deriv';
-  const tipo = t.transaction_type || (profit>=0?'WIN':'LOSS');
-  registerDerivOp({ profit, symbol, tipo, ts: Date.now(), derivId: t.transaction_id });
-  feedLog(profit>=0?'win':'loss', `${symbol} | ${profit>=0?'+':''}${profit.toFixed(2)} USD | ${tipo}`);
+  const symbol = t.symbol || 'Deriv';
+  registerDerivOp({ profit, symbol, ts: Date.now(), derivId: t.transaction_id });
 }
 
-async function registerDerivOp({profit, symbol, tipo, ts, derivId}){
-  const already = window._ops.find(o=>o.derivId && o.derivId===derivId);
-  if(already) return;
-  // Actualizar P&L del día
+async function registerDerivOp({profit, symbol, ts, derivId}){
   if(profit > 0) _profitHoy += profit;
   else _lossHoy += Math.abs(profit);
-  document.getElementById('dv-profit-dia').textContent = '+$'+_profitHoy.toFixed(2);
-  document.getElementById('dv-profit-dia').className = 'metric-value v-pos';
-  document.getElementById('dv-loss-dia').textContent = '-$'+_lossHoy.toFixed(2);
-  document.getElementById('dv-loss-dia').className = 'metric-value v-neg';
-  // Calcular si debe parar
+  
   const saldo = parseFloat(document.getElementById('b-saldo').value)||0;
   const metaperd = parseFloat(document.getElementById('b-meta-perd').value)||1;
   const mPerd = saldo * metaperd / 100;
-  const currentPnl = window._ops.reduce((a,o)=>a+(parseFloat(o.result)||0),0) + profit;
+  const currentPnl = _profitHoy - _lossHoy;
   const parar = currentPnl <= -mPerd ? 'SI' : 'NO';
-  const op = { activo: symbol, result: profit, tipo: tipo, notas: 'Auto-Deriv', parar, ts, derivId, origen:'deriv' };
-  if(db){
-    await addDoc(rcol('ops'), op);
-  } else {
-    window._ops.push({id:Date.now().toString(),...op}); renderOps(); calcBitacora();
+
+  // EL CEREBRO: LA INYECCIÓN QUE BLOQUEA TU MT5
+  if(parar === 'SI') {
+    await setDoc(rdoc('config/lockdown'), {
+      active: true,
+      unlock_at: Date.now() + (2 * 3600 * 1000),
+      reason: "Límite de pérdida alcanzado"
+    });
+    toast('🚨 MODO REGULACIÓN: Guardián activado');
   }
-  if(parar==='SI') toast('🛑 LÍMITE DE PÉRDIDA — Detén operaciones');
 }
-
-function setDerivStatus(s){
-  const dot = document.getElementById('deriv-dot');
-  const txt = document.getElementById('deriv-status-txt');
-  const ld = document.getElementById('live-dot');
-  const states = { connecting:{c:'var(--warn)',t:'Deriv: conectando…'}, connected:{c:'var(--accent)',t:'Deriv: conectado ✓'}, disconnected:{c:'var(--text3)',t:'Deriv: desconectado'}, error:{c:'var(--danger)',t:'Deriv: error'} };
-  const st = states[s]||states.disconnected;
-  dot.style.background = st.c;
-  txt.textContent = st.t;
-  ld.style.background = s==='connected' ? 'var(--accent)' : 'var(--text3)';
-}
-
-function feedLog(type, msg){
-  const feed = document.getElementById('live-feed');
-  const now = new Date().toLocaleTimeString('es',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-  const row = document.createElement('div');
-  row.className = `feed-row ${type}`;
-  row.innerHTML = `<span class="feed-time">${now}</span><span class="feed-msg">${msg}</span>`;
-  feed.prepend(row);
-  while(feed.children.length > 50) feed.removeChild(feed.lastChild);
-}
-
-// ─── BITACORA ────────────────────────────────────────────
-window._ops = [];
-
-window.saveDayConfig = async ()=>{
-  if(!db){ toast('Firebase no configurado'); return; }
-  await setDoc(rdoc('config/day'),{ saldo:parseFloat(document.getElementById('b-saldo').value)||0, fecha:document.getElementById('b-fecha').value, metagan:parseFloat(document.getElementById('b-meta-gan').value)||3, metaperd:parseFloat(document.getElementById('b-meta-perd').value)||1 });
-  toast('✅ Config guardada');
-};
-
-window.calcBitacora = ()=>{
-  const saldo=parseFloat(document.getElementById('b-saldo').value)||0;
-  const mg=parseFloat(document.getElementById('b-meta-gan').value)||3;
-  const mp=parseFloat(document.getElementById('b-meta-perd').value)||1;
-  const pnl=window._ops.reduce((a,o)=>a+(parseFloat(o.result)||0),0);
-  const pct=saldo>0?(pnl/saldo*100):0;
-  const mGan=saldo*mg/100, mPerd=saldo*mp/100;
-  document.getElementById('m-meta-gan').textContent='$'+mGan.toFixed(2);
-  document.getElementById('m-meta-perd').textContent='-$'+mPerd.toFixed(2);
-  const pe=document.getElementById('m-pnl'); pe.textContent=(pnl>=0?'+$':'$')+pnl.toFixed(2); pe.className='metric-value '+(pnl>0?'v-pos':pnl<0?'v-neg':'');
-  const pp=document.getElementById('m-pnl-pct'); pp.textContent=pct.toFixed(2)+'%'; pp.className='metric-value '+(pct>0?'v-pos':pct<0?'v-neg':'');
-  const sb=document.getElementById('b-status');
-  if(pnl>=mGan){sb.className='status-bar s-ok';sb.textContent='🏆 META ALCANZADA — DETENER HOY';}
-  else if(pnl<=-mPerd){sb.className='status-bar s-danger';sb.textContent='🛑 LÍMITE DE PÉRDIDA — PARAR OPERACIONES';}
-  else{sb.className='status-bar s-ok';sb.textContent='✅ EN PROCESO — CONTINUAR OPERANDO';}
-  renderChart();
-};
-
-window.openAddOp=()=>document.getElementById('modal-add').style.display='flex';
-window.closeModal=()=>document.getElementById('modal-add').style.display='none';
-
-window.addOpManual = async ()=>{
-  const activo=document.getElementById('op-activo').value.trim();
-  const result=parseFloat(document.getElementById('op-result').value)||0;
-  const notas=document.getElementById('op-notas').value.trim();
-  const tipo=document.getElementById('op-tipo').value;
-  if(!activo){toast('⚠ Ingresa el activo');return;}
-  const saldo=parseFloat(document.getElementById('b-saldo').value)||0;
-  const mp=parseFloat(document.getElementById('b-meta-perd').value)||1;
-  const mPerd=saldo*mp/100;
-  const cum=window._ops.reduce((a,o)=>a+(parseFloat(o.result)||0),0)+result;
-  const parar=cum<=-mPerd?'SI':'NO';
-  const op={activo,result,notas,tipo,parar,ts:Date.now(),origen:'manual'};
-  if(db){ await addDoc(rcol('ops'),op); }
-  else { window._ops.push({id:Date.now().toString(),...op}); renderOps(); calcBitacora(); }
-  document.getElementById('op-activo').value=''; document.getElementById('op-result').value=''; document.getElementById('op-notas').value='';
-  closeModal(); toast('✅ Operación registrada');
-};
-
-window.delOp = async id=>{
-  if(!confirm('¿Eliminar?')) return;
-  if(db){ await deleteDoc(doc(db,'rooms',room,'ops',id)); }
-  else { window._ops=window._ops.filter(o=>o.id!==id); renderOps(); calcBitacora(); }
-};
-
-window.renderOps = ()=>{
-  const tb=document.getElementById('ops-tbody');
-  if(!window._ops.length){tb.innerHTML='<tr><td colspan="9" class="empty">Sin operaciones hoy.</td></tr>';return;}
-  let acc=0;
-  tb.innerHTML=window._ops.map((o,i)=>{
-    acc+=parseFloat(o.result)||0;
-    const rc=(parseFloat(o.result)||0)>=0?'v-pos':'v-neg';
-    const ac=acc>=0?'v-pos':'v-neg';
-    const tipoBadge=o.tipo==='BUY'?'b-buy':o.tipo==='SELL'?'b-sell':'';
-    const origenBadge=o.origen==='deriv'?'<span class="badge b-auto">AUTO</span>':'<span class="badge" style="background:var(--surface3);color:var(--text3)">MANUAL</span>';
-    return `<tr>
-      <td>${i+1}</td>
-      <td><b>${o.activo}</b></td>
-      <td>${o.tipo?`<span class="badge ${tipoBadge}">${o.tipo}</span>`:'—'}</td>
-      <td class="${rc}">${(parseFloat(o.result)||0)>=0?'+':''}${(parseFloat(o.result)||0).toFixed(2)}</td>
-      <td class="${ac}">${acc>=0?'+':''}${acc.toFixed(2)}</td>
-      <td>${origenBadge}</td>
-      <td><span class="badge ${o.parar==='SI'?'b-stop':'b-ok'}">${o.parar}</span></td>
-      <td style="font-size:12px;color:var(--text2);max-width:120px">${o.notas||'—'}</td>
-      <td><button class="btn btn-ghost btn-sm btn-icon" onclick="delOp('${o.id}')">✕</button></td>
-    </tr>`;
-  }).join('');
-};
-
-window.clearDay = async ()=>{
-  if(!confirm('¿Limpiar todas las operaciones del día?')) return;
-  _profitHoy=0; _lossHoy=0;
-  document.getElementById('dv-profit-dia').textContent='$0.00';
-  document.getElementById('dv-loss-dia').textContent='$0.00';
-  if(db){ const s=await getDocs(rcol('ops')); const b=writeBatch(db); s.forEach(d=>b.delete(d.ref)); await b.commit(); }
-  else { window._ops=[]; renderOps(); calcBitacora(); }
-  toast('🗑 Día limpiado');
-};
-
-window.exportCSV = ()=>{
-  let csv='#,Activo,Tipo,Resultado,Acumulado,Origen,Parar,Notas\n'; let acc=0;
-  window._ops.forEach((o,i)=>{ acc+=parseFloat(o.result)||0; csv+=`${i+1},"${o.activo}","${o.tipo||''}",${(parseFloat(o.result)||0).toFixed(2)},${acc.toFixed(2)},${o.origen||''},${o.parar},"${(o.notas||'').replace(/"/g,"'")}"\n`; });
-  const a=document.createElement('a'); a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv); a.download='bitacora_trading.csv'; a.click();
-};
-
-// ─── CALCULADORA ─────────────────────────────────────────
-window.calcLotaje=()=>{
-  const pts=parseFloat(document.getElementById('c-puntos').value)||21;
-  const sl=parseFloat(document.getElementById('c-sl').value)||1;
-  document.getElementById('cr-profit').textContent=(sl*3).toFixed(2);
-  document.getElementById('cr-lotaje').textContent=(sl/pts).toFixed(4);
-  document.getElementById('cr-2ent').textContent=(sl/pts/2).toFixed(4);
-  document.getElementById('cr-riesgo').textContent=(sl*sl/pts).toFixed(4);
-};
-
-// ─── RIESGO ──────────────────────────────────────────────
-window.calcRiesgo=()=>{
-  const c=parseFloat(document.getElementById('r-capital').value)||1000;
-  const p=parseFloat(document.getElementById('r-pct').value)||2;
-  const n=parseFloat(document.getElementById('r-ops').value)||3;
-  const d=c*p/100;
-  document.getElementById('rr-diario').textContent='$'+d.toFixed(2);
-  document.getElementById('rr-op').textContent='$'+(d/n).toFixed(2);
-  document.getElementById('rr-sl').textContent='$'+(d/n).toFixed(2);
-};
-
-window.saveRiesgo=async()=>{
-  if(!db) return;
-  await setDoc(rdoc('config/riesgo'),{capital:parseFloat(document.getElementById('r-capital').value)||1000,pct:parseFloat(document.getElementById('r-pct').value)||2,ops:parseFloat(document.getElementById('r-ops').value)||3});
-  toast('✅ Riesgo guardado');
-};
-
-// ─── PLAN 21 ─────────────────────────────────────────────
-window.calcPlan21=()=>{
-  const c=parseFloat(document.getElementById('p-capital').value)||150;
-  const p=parseFloat(document.getElementById('p-pct').value)||20;
-  const days=[]; let cur=c;
-  for(let i=1;i<=21;i++){cur*=(1+p/100);days.push(cur);}
-  document.getElementById('p-d1').textContent='$'+days[0].toFixed(2);
-  document.getElementById('p-d7').textContent='$'+days[6].toFixed(2);
-  document.getElementById('p-d14').textContent='$'+days[13].toFixed(2);
-  document.getElementById('p-d21').textContent='$'+days[20].toFixed(2);
-  document.getElementById('p-ini').textContent='$'+c.toFixed(2);
-  document.getElementById('p-fin').textContent='$'+days[20].toFixed(2);
-  document.getElementById('p-gan').textContent='$'+(days[20]-c).toFixed(2);
-  document.getElementById('p-inc').textContent=((days[20]/c-1)*100).toFixed(0)+'%';
-  document.getElementById('days-grid').innerHTML=days.map((v,i)=>`<div class="day-cell ${[0,6,13,20].includes(i)?'hi':''}"><div class="dn">DÍA ${i+1}</div><div class="dv ${v>=c?'v-pos':''}">$${v.toFixed(0)}</div></div>`).join('');
-};
-
-window.savePlan21=async()=>{
-  if(!db) return;
-  await setDoc(rdoc('config/plan21'),{capital:parseFloat(document.getElementById('p-capital').value)||150,pct:parseFloat(document.getElementById('p-pct').value)||20});
-  toast('✅ Plan guardado');
-};
-
-// ─── SALUD ────────────────────────────────────────────────
-window._salud={agua:false,estirar:false,meds:false,loz9:false,aml4:false,loz9pm:false,notas:''};
-let _deb=null;
-window.toggleHealth=async k=>{window._salud[k]=!window._salud[k];renderSalud(window._salud);if(db)await setDoc(rdoc('config/salud'),window._salud);};
-window.toggleMed=async k=>{window._salud[k]=!window._salud[k];renderSalud(window._salud);if(db)await setDoc(rdoc('config/salud'),window._salud);};
-window.debSaveHealth=()=>{window._salud.notas=document.getElementById('salud-notas').value;clearTimeout(_deb);_deb=setTimeout(async()=>{if(db)await setDoc(rdoc('config/salud'),window._salud);},700);};
-function renderSalud(d){
-  ['agua','estirar','meds'].forEach(k=>{const el=document.getElementById('h-'+k);if(el)el.classList.toggle('done',!!d[k]);});
-  ['loz9','aml4','loz9pm'].forEach(k=>{const el=document.getElementById('med-'+k);if(el)el.classList.toggle('taken',!!d[k]);});
-  const n=document.getElementById('salud-notas');if(n&&d.notas!==undefined&&n!==document.activeElement)n.value=d.notas||'';
-}
-
-// ─── CHART ────────────────────────────────────────────────
-let _chart=null;
-window.renderChart=()=>{
-  const canvas=document.getElementById('pnl-chart');if(!canvas)return;
-  const labels=[],data=[];let acc=0;
-  window._ops.forEach((o,i)=>{acc+=parseFloat(o.result)||0;labels.push('#'+(i+1));data.push(parseFloat(acc.toFixed(2)));});
-  if(!labels.length){if(_chart){_chart.destroy();_chart=null;}return;}
-  if(_chart)_chart.destroy();
-  _chart=new Chart(canvas,{type:'line',data:{labels,datasets:[{label:'P&L',data,borderColor:'#00e5a0',backgroundColor:'#00e5a012',tension:.4,fill:true,pointBackgroundColor:'#00e5a0',pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>(ctx.raw>=0?'+':'')+ctx.raw.toFixed(2)+' USD'}}},scales:{x:{ticks:{color:'#8892a4',font:{size:11}},grid:{color:'#ffffff07'}},y:{ticks:{color:'#8892a4',font:{size:11}},grid:{color:'#ffffff07'}}}}});
-};
-
-// ─── UI ──────────────────────────────────────────────────
-window.switchTab=(name,btn)=>{
-  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  btn.classList.add('active');
-};
-
-window.toast=msg=>{
-  const w=document.getElementById('toasts');
-  const el=document.createElement('div');el.className='toast';el.textContent=msg;w.appendChild(el);
-  setTimeout(()=>el.remove(),3000);
-};
-
-// ─── INIT ─────────────────────────────────────────────────
-document.getElementById('b-fecha').value=new Date().toISOString().slice(0,10);
-calcBitacora(); calcLotaje(); calcRiesgo(); calcPlan21();
 </script>
 </body>
 </html>
